@@ -2,11 +2,15 @@ import articleModel from '../model/article'
 
 class Article {
     async add(ctx, context) {
-        await articleModel.add({desc: ''})
-        ctx.body = 'sucess'
+        console.log(ctx.request.fields, '-----')
+        await articleModel.add(ctx.request.fields)
+        ctx.body = {
+            code: 0,
+            message: 'success'
+        }
     }
 
-    async all(ctx, context){
+    async all(ctx, context) {
         ctx.body = await articleModel.all()
     }
 }

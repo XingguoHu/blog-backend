@@ -2,7 +2,9 @@
 exports.__esModule = true;
 var Router = require("koa-router");
 var article_1 = require("./controller/article");
+var file_1 = require("./controller/file");
 var router = new Router();
 router.post('/article', article_1["default"].add);
 router.get('/article/all', article_1["default"].all);
+router.post('/upload', file_1["default"].add);
 exports["default"] = router;

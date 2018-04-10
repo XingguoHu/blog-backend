@@ -35,43 +35,34 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
-var article_1 = require("../model/article");
-var Article = /** @class */ (function () {
-    function Article() {
+var fs = require("fs");
+var file = /** @class */ (function () {
+    function file() {
     }
-    Article.prototype.add = function (ctx, context) {
+    file.prototype.add = function (ctx, next) {
         return __awaiter(this, void 0, void 0, function () {
+            var file, des_file, data;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        console.log(ctx.request.fields, '-----');
-                        return [4 /*yield*/, article_1["default"].add(ctx.request.fields)];
+                        console.log(ctx.request.files[0]);
+                        file = ctx.request.files[0];
+                        des_file = './files/' + file.name;
+                        return [4 /*yield*/, fs.readFile(file.path, null)];
                     case 1:
+                        data = _a.sent();
+                        return [4 /*yield*/, fs.writeFile(des_file, data)];
+                    case 2:
                         _a.sent();
                         ctx.body = {
                             code: 0,
-                            message: 'success'
+                            message: 'sucess'
                         };
                         return [2 /*return*/];
                 }
             });
         });
     };
-    Article.prototype.all = function (ctx, context) {
-        return __awaiter(this, void 0, void 0, function () {
-            var _a;
-            return __generator(this, function (_b) {
-                switch (_b.label) {
-                    case 0:
-                        _a = ctx;
-                        return [4 /*yield*/, article_1["default"].all()];
-                    case 1:
-                        _a.body = _b.sent();
-                        return [2 /*return*/];
-                }
-            });
-        });
-    };
-    return Article;
+    return file;
 }());
-exports["default"] = new Article();
+exports["default"] = new file();
