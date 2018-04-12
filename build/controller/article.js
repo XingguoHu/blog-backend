@@ -10,9 +10,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const article_1 = require("../model/article");
 class Article {
-    add(ctx, context) {
+    add(ctx, next) {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log(ctx.request.fields, '-----');
             yield article_1.default.add(ctx.request.fields);
             ctx.body = {
                 code: 0,
@@ -20,7 +19,7 @@ class Article {
             };
         });
     }
-    all(ctx, context) {
+    all(ctx, next) {
         return __awaiter(this, void 0, void 0, function* () {
             ctx.body = yield article_1.default.all();
         });

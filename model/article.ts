@@ -1,5 +1,4 @@
 import * as mongoose from 'mongoose'
-
 class Article {
     Article: any
     constructor(mongoose) {
@@ -11,9 +10,9 @@ class Article {
         this.Article = mongoose.model('article', articleSchema)
     }
 
-    async add(params) {
-        const article: any = new this.Article(params);
-        await article.save();
+    async add(params: any = {}) {
+        const article: any = new this.Article(params)
+        await article.save()
     }
 
     async all() {
@@ -22,3 +21,4 @@ class Article {
 }
 
 export default new Article(mongoose)
+

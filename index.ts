@@ -3,12 +3,11 @@ import router from './router'
 import * as mongoose from 'mongoose'
 import * as cors from 'koa2-cors'
 import * as body from 'koa-better-body'
-const app = new Koa()
+const app: any = new Koa()
 mongoose.connect('mongodb://localhost/blog')
 app.use(
     cors({
         origin: function(ctx) {
-            console.log(ctx.url, ctx.origin)
             return '*'
         },
         exposeHeaders: ['WWW-Authenticate', 'Server-Authorization'],
@@ -18,7 +17,8 @@ app.use(
         allowHeaders: ['Content-Type', 'Authorization', 'Accept']
     })
 )
-app.use(body({}))
+app.use(body())
 app.use(router.routes())
 
 app.listen(3030)
+

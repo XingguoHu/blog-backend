@@ -9,7 +9,6 @@ const app = new Koa();
 mongoose.connect('mongodb://localhost/blog');
 app.use(cors({
     origin: function (ctx) {
-        console.log(ctx.url, ctx.origin);
         return '*';
     },
     exposeHeaders: ['WWW-Authenticate', 'Server-Authorization'],
@@ -18,6 +17,6 @@ app.use(cors({
     allowMethods: ['GET', 'POST', 'DELETE'],
     allowHeaders: ['Content-Type', 'Authorization', 'Accept']
 }));
-app.use(body({}));
+app.use(body());
 app.use(router_1.default.routes());
 app.listen(3030);

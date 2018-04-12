@@ -18,7 +18,7 @@ class Article {
         });
         this.Article = mongoose.model('article', articleSchema);
     }
-    add(params) {
+    add(params = {}) {
         return __awaiter(this, void 0, void 0, function* () {
             const article = new this.Article(params);
             yield article.save();
