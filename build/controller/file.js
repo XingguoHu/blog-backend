@@ -29,7 +29,6 @@ class FileController {
             else {
                 let dir = `./files/d${fields.fileName}/`;
                 if (Number(fields.total) === Number(fields.index) + 1) {
-                    console.log(1);
                     const des_file = './files/' + fields.fileName;
                     let filePathList = yield file_1.default.readDir(dir);
                     filePathList = filePathList.map(i => {
@@ -45,9 +44,10 @@ class FileController {
                     };
                 }
                 else {
-                    if (fields.index == 0) {
+                    try {
                         yield file_1.default.mkDir(dir);
                     }
+                    catch (e) { }
                     const des_file = dir + fields.index;
                     yield file_1.default.writeFile(des_file, yield file_1.default.readFile(file.path));
                     ctx.body = {

@@ -20,7 +20,6 @@ class FileController {
         } else {
             let dir = `./files/d${fields.fileName}/`
             if (Number(fields.total) === Number(fields.index) + 1) {
-                console.log(1)
                 const des_file: string = './files/' + fields.fileName
                 let filePathList = await fs.readDir(dir)
                 filePathList = filePathList.map(i => {
@@ -35,9 +34,10 @@ class FileController {
                     message: 'sucess'
                 }
             } else {
-                if (fields.index == 0) {
+                try {
                     await fs.mkDir(dir)
-                }
+                } catch (e) {}
+
                 const des_file: string = dir + fields.index
                 await fs.writeFile(des_file, await fs.readFile(file.path))
                 ctx.body = {
@@ -53,11 +53,10 @@ class FileController {
             buffers.push(await fs.readFile(filePathList[i]))
             if (i !== filePathList.length - 1) {
                 await fs.unLink(filePathList[i])
-            }else{
+            } else {
                 await fs.rmDir(dir)
             }
         }
-
         return Buffer.concat(buffers)
     }
 }
